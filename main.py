@@ -57,7 +57,20 @@ def courseSelector(driver):
 
         instructorSelected.click()
 
+def getAssignments(driver):
+    getAssignmentsButton = getElement(driver, "/html/body/div[2]/div/section[2]/div/div[2]/button[3]")
+    getAssignmentsButton.click()
 
+    try:
+        assignmentElement = WebDriverWait(driver, 10).until(
+            presence_of_element_located(
+                (By.XPATH, "/html/body/div[2]/div/section[2]/div/div[1]/div[3]/h3")
+            )
+        )
+    finally:
+        assignmentList = driver.find_elements(By.CLASS_NAME, "panel-content")
+        for assignment in assignmentList:
+            print(assignment.text)
 
 
 
@@ -68,6 +81,7 @@ def Main():
     driver = webdriver.Firefox()
     login(driver, email, password)
     courseSelector(driver)
-
+    getAssignments(driver)
+    driver.quit()
 
 Main()
