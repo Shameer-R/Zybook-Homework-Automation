@@ -28,7 +28,7 @@ def login(driver, email, password):
     signInButton = getElement(driver, "/html/body/div[2]/div/div/div[3]/button")
     signInButton.click()
 
-    print("Successfully signed into Zybooks!")
+    print("Successfully signed into Zybooks!!!")
 
 
 
