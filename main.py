@@ -51,7 +51,11 @@ def courseSelector(driver):
             print(instructor.text + " - " + str(index))
             index += 1
 
-        instructorSelected = input("\nSelect the number corresponding to your instructor: ")
+        instructorIndex = int(input("\nSelect the number corresponding to your instructor: "))
+
+        instructorSelected = instructorList[instructorIndex]
+
+        instructorSelected.click()
 
 
 
