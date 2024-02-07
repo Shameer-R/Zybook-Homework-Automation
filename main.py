@@ -68,9 +68,15 @@ def getAssignments(driver):
             )
         )
     finally:
-        assignmentList = driver.find_elements(By.CLASS_NAME, "panel-content")
+        panelList = driver.find_element(By.CLASS_NAME, "panel-content")
+        assignmentList = panelList.find_elements(By.TAG_NAME, "h3")
+
+        index = 0
+
         for assignment in assignmentList:
-            print(assignment.text)
+            if assignment.text != "Active":
+                print(assignment.text + " - " + str(index))
+                index += 1
 
 
 
@@ -82,6 +88,5 @@ def Main():
     login(driver, email, password)
     courseSelector(driver)
     getAssignments(driver)
-    driver.quit()
 
 Main()
