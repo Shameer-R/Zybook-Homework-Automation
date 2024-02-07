@@ -44,12 +44,14 @@ def courseSelector(driver):
         )
     finally:
 
-        instructorSelected = int(input("\nSelect the number corresponding to your instructor: "))
+
         index = 0
         instructorList = driver.find_elements(By.CLASS_NAME, "subheading")
         for instructor in instructorList:
             print(instructor.text + " - " + str(index))
             index += 1
+
+        instructorSelected = input("\nSelect the number corresponding to your instructor: ")
 
 
 
