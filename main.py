@@ -16,6 +16,8 @@ def getElement(driver, xPath):
 
 def login(driver, email, password):
 
+    print("\nSigning in to zybooks...")
+
     driver.get("https://www.zybooks.com/")
 
     loginButton = getElement(driver, "/html/body/div[1]/header/div[2]/div/div/nav/div/ul/li[7]/a/span[2]")
@@ -30,7 +32,7 @@ def login(driver, email, password):
     signInButton = getElement(driver, "/html/body/div[2]/div/div/div[3]/button")
     signInButton.click()
 
-    print("Successfully signed into Zybooks!!!")
+    print("Successfully signed into Zybooks!!!\n")
 
 def courseSelector(driver):
 
@@ -50,6 +52,7 @@ def courseSelector(driver):
             index += 1
 
         instructorIndex = int(input("\nSelect the number corresponding to your instructor: "))
+        print("")
 
         instructorSelected = instructorList[instructorIndex]
 
@@ -80,6 +83,7 @@ def getAssignments(driver):
                 index += 1
 
         assignmentIndex = int(input("\nSelect the number corresponding to the assignment: "))
+        print("")
         assignmentSelection = newAssignments[assignmentIndex]
         assignmentSelection.click()
 
@@ -97,7 +101,7 @@ def completeSlides(driver):
         slide.find_element(By.TAG_NAME, "input").click() # Click 2x speed button
 
         while index < len(amountOfSlides):
-            print(index)
+            print("Slide: " + str(index + 1) + "/" + str(len(amountOfSlides)) + " completed")
             try:
                 playButton = WebDriverWait(driver, 10).until(
                     presence_of_element_located(
@@ -108,6 +112,7 @@ def completeSlides(driver):
                 playButton.click()
                 index += 1
         slide.find_element(By.TAG_NAME, "button").click()
+        print("Slide Completed")
 
 def completeMultipleChoice(driver):
 
@@ -117,8 +122,7 @@ def completeMultipleChoice(driver):
             activity.click()
         print("Multiple Choice Activity Completed")
     else:
-        print("No multiple choice")
-
+        print("No mutliple choice acttivites on this page")
 
 
 
@@ -155,6 +159,7 @@ def moduleSelector(driver):
             completeActivites(driver)
             driver.execute_script("window.history.go(-1)")
             index += 1
+            print("Page Completed")
         if index == len(moduleElementList):
             break
 
@@ -166,7 +171,11 @@ def Main():
     email = input("Enter your Zybook email: ")
     password = input("Enter your Zybook password: ")
 
-    driver = webdriver.Firefox()
+    options = webdriver.FirefoxOptions()
+    options.add_argument("--headless")
+    driver = webdriver.Firefox(options=options)
+
+
     login(driver, email, password)
     courseSelector(driver)
     getAssignments(driver)
