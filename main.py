@@ -1,5 +1,3 @@
-import time
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -31,8 +29,6 @@ def login(driver, email, password):
 
     signInButton = getElement(driver, "/html/body/div[2]/div/div/div[3]/button")
     signInButton.click()
-
-
 
     print("Successfully signed into Zybooks!!!")
 
@@ -87,6 +83,19 @@ def getAssignments(driver):
         assignmentSelection = newAssignments[assignmentIndex]
         assignmentSelection.click()
 
+def completeMultipleChoice(driver):
+
+    activityInputList = driver.find_elements(By.TAG_NAME, "input")
+    if activityInputList:
+        for activity in activityInputList:
+            activity.click()
+        print("Multiple Choice Activity Completed")
+    else:
+        print("No multiple choice")
+
+
+
+
 def completeActivites(driver):
     try:
         activityChecker = WebDriverWait(driver, 10).until(
@@ -96,8 +105,10 @@ def completeActivites(driver):
         )
     finally:
         activityElements = driver.find_elements(By.CLASS_NAME, "activity-type")
-        for activity in activityElements:
-            print(activity.text)
+        completeMultipleChoice(driver)
+
+
+
 
 def moduleSelector(driver):
 
@@ -133,7 +144,7 @@ def Main():
     courseSelector(driver)
     getAssignments(driver)
     moduleSelector(driver)
-
+    driver.quit()
 
 
 Main()
