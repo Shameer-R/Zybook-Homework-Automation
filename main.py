@@ -94,6 +94,8 @@ def completeSlides(driver):
 
         index = 0
 
+        slide.find_element(By.TAG_NAME, "input").click() # Click 2x speed button
+
         while index < len(amountOfSlides):
             print(index)
             try:
@@ -129,7 +131,7 @@ def completeActivites(driver):
     finally:
         activityElements = driver.find_elements(By.CLASS_NAME, "activity-type")
         completeSlides(driver)
-        #completeMultipleChoice(driver)
+        completeMultipleChoice(driver)
 
 
 
