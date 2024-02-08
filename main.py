@@ -85,6 +85,17 @@ def getAssignments(driver):
         assignmentSelection = newAssignments[assignmentIndex]
         assignmentSelection.click()
 
+def moduleSelector(driver):
+    try:
+        moduleElement = WebDriverWait(driver, 10).until(
+            presence_of_element_located(
+                (By.CLASS_NAME, "underline")
+            )
+        )
+    finally:
+        moduleElementList = driver.find_elements(By.CLASS_NAME, "underline")
+        for module in moduleElementList:
+            print(module.text)
 
 
 def Main():
@@ -95,6 +106,7 @@ def Main():
     login(driver, email, password)
     courseSelector(driver)
     getAssignments(driver)
+    moduleSelector(driver)
 
 
 
