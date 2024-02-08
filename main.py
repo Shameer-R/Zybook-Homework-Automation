@@ -73,10 +73,17 @@ def getAssignments(driver):
 
         index = 0
 
+        newAssignments = []
+
         for assignment in assignmentList:
             if assignment.text != "Active":
                 print(str(index) + ": " + assignment.text)
+                newAssignments.append(assignment)
                 index += 1
+
+        assignmentIndex = int(input("\nSelect the number corresponding to the assignment: "))
+        assignmentSelection = newAssignments[assignmentIndex]
+        assignmentSelection.click()
 
 
 
@@ -88,6 +95,7 @@ def Main():
     login(driver, email, password)
     courseSelector(driver)
     getAssignments(driver)
-    driver.quit()
+
+
 
 Main()
