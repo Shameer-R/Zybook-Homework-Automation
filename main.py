@@ -83,6 +83,29 @@ def getAssignments(driver):
         assignmentSelection = newAssignments[assignmentIndex]
         assignmentSelection.click()
 
+def completeSlides(driver):
+    slides = driver.find_elements(By.CLASS_NAME, "animation-controls")
+
+    for slide in slides:
+        # Click the animation start button
+        slide.find_element(By.TAG_NAME, "button").click()
+
+        amountOfSlides = slide.find_elements(By.TAG_NAME, "span")
+
+        index = 0
+
+        while index < len(amountOfSlides):
+            print(index)
+            try:
+                playButton = WebDriverWait(driver, 10).until(
+                    presence_of_element_located(
+                        (By.CSS_SELECTOR, ".play-button")
+                    )
+                )
+            finally:
+                playButton.click()
+                index += 1
+
 def completeMultipleChoice(driver):
 
     activityInputList = driver.find_elements(By.TAG_NAME, "input")
@@ -105,7 +128,8 @@ def completeActivites(driver):
         )
     finally:
         activityElements = driver.find_elements(By.CLASS_NAME, "activity-type")
-        completeMultipleChoice(driver)
+        completeSlides(driver)
+        #completeMultipleChoice(driver)
 
 
 
@@ -144,7 +168,6 @@ def Main():
     courseSelector(driver)
     getAssignments(driver)
     moduleSelector(driver)
-    driver.quit()
 
 
 Main()
