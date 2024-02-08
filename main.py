@@ -107,6 +107,7 @@ def completeSlides(driver):
             finally:
                 playButton.click()
                 index += 1
+        slide.find_element(By.TAG_NAME, "button").click()
 
 def completeMultipleChoice(driver):
 
