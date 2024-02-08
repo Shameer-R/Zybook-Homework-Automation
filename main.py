@@ -1,3 +1,5 @@
+import time
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -85,17 +87,41 @@ def getAssignments(driver):
         assignmentSelection = newAssignments[assignmentIndex]
         assignmentSelection.click()
 
-def moduleSelector(driver):
+def completeActivites(driver):
     try:
-        moduleElement = WebDriverWait(driver, 10).until(
+        activityChecker = WebDriverWait(driver, 10).until(
             presence_of_element_located(
-                (By.CLASS_NAME, "underline")
+                (By.CLASS_NAME, "activity-type")
             )
         )
     finally:
-        moduleElementList = driver.find_elements(By.CLASS_NAME, "underline")
-        for module in moduleElementList:
-            print(module.text)
+        activityElements = driver.find_elements(By.CLASS_NAME, "activity-type")
+        for activity in activityElements:
+            print(activity.text)
+
+def moduleSelector(driver):
+
+    index = 0
+
+    while True:
+        try:
+            moduleElement = WebDriverWait(driver, 10).until(
+                presence_of_element_located(
+                    (By.CLASS_NAME, "underline")
+                )
+            )
+        finally:
+            moduleElementList = driver.find_elements(By.CLASS_NAME, "underline")
+            selectedModule = moduleElementList[index]
+            selectedModule.click()
+            completeActivites(driver)
+            driver.execute_script("window.history.go(-1)")
+            index += 1
+        if index == len(moduleElementList):
+            break
+
+
+
 
 
 def Main():
