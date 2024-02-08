@@ -75,7 +75,7 @@ def getAssignments(driver):
 
         for assignment in assignmentList:
             if assignment.text != "Active":
-                print(assignment.text + " - " + str(index))
+                print(str(index) + ": " + assignment.text)
                 index += 1
 
 
@@ -88,5 +88,6 @@ def Main():
     login(driver, email, password)
     courseSelector(driver)
     getAssignments(driver)
+    driver.quit()
 
 Main()
