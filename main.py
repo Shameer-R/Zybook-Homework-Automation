@@ -130,10 +130,32 @@ def completeQuestions(driver):
 
     if questionElementList:
         for questionElement in questionElementList:
+
+
+
             spanElementList = questionElement.find_elements(By.TAG_NAME, "span")
-            for spanElement in spanElementList: # Click Show Answer Button
-                if spanElement.text == "Show answer":
-                    spanElement.click()
+
+            if len(spanElementList) >= 1:
+
+                checkAnswerButton = spanElementList[0]
+                showAnswerButton = spanElementList[1]
+
+
+                showAnswerButton.click()
+                showAnswerButton.click()
+
+                # Get the Parent Question Container
+                questionElementParent = questionElement.find_element(By.XPATH, "..")
+
+                answerElement = questionElementParent.find_element(By.CLASS_NAME, "forfeit-answer")
+
+                questionElementParent.find_element(By.TAG_NAME, "textarea").send_keys(answerElement.text)
+
+                # Submit Answer
+
+                checkAnswerButton.click()
+
+                print("Question complete")
 
 
 
