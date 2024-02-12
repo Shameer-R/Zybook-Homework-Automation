@@ -124,6 +124,18 @@ def completeMultipleChoice(driver):
     else:
         print("No mutliple choice acttivites on this page")
 
+def completeQuestions(driver):
+
+    questionElementList = driver.find_elements(By.CLASS_NAME, "question")
+
+    if questionElementList:
+        for questionElement in questionElementList:
+            spanElementList = questionElement.find_elements(By.TAG_NAME, "span")
+            for spanElement in spanElementList: # Click Show Answer Button
+                if spanElement.text == "Show answer":
+                    spanElement.click()
+
+
 
 
 def completeActivites(driver):
@@ -137,6 +149,7 @@ def completeActivites(driver):
         activityElements = driver.find_elements(By.CLASS_NAME, "activity-type")
         completeSlides(driver)
         completeMultipleChoice(driver)
+        completeQuestions(driver)
 
 
 
