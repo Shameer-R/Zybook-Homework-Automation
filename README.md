@@ -1,6 +1,6 @@
 # zyBooks Homework Automation
 
-This a Python 3 script that automates zyBooks participation activites. This currently applies to zyBooks': Short answer questions, Multiple Choice Questions, and Slides Presentations. I don't have plans to maintain this script but I will accept any helpful pull requests.
+This is a Python 3 script that automates zyBooks participation activites. This currently applies to zyBooks': Short answer questions, Multiple Choice Questions, and Slides Presentations. I don't have plans to maintain this script but I will accept any helpful pull requests.
 
 # Requirements
 
