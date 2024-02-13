@@ -4,7 +4,7 @@ This a Python 3 script that automates zyBooks participation activites. This curr
 
 # Requirements
 
-1) The Firefox web browser which can be installed from [Mozilla's Official Website](https://pages.github.com/](https://www.mozilla.org/en-US/firefox/)https://www.mozilla.org/en-US/firefox/)
+1) The Firefox web browser which can be installed from [Mozilla's Official Website](https://www.mozilla.org/en-US/firefox/)
 2) Python 3 which can be installed from [Python's Official Website](https://www.python.org/downloads/)
 
 # Installation
