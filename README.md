@@ -20,7 +20,7 @@ When you run the script, you'll be prompted for:
 3) The course you want to automate
 4) The specific homework assignment you want to complete
 
-The script will then run through all the participation activities in the assignemnt of your choosing.
+The script will then run through all the participation activities in the assignment of your choosing.
 
 
 Sometimes the script will throw out an error or give off faulty prompts, just rerun the script to fix the problem.
