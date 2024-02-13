@@ -14,6 +14,7 @@ def getElement(driver, xPath):
     finally:
         return element
 
+
 def login(driver, email, password):
 
     print("\nSigning in to zybooks...")
@@ -36,6 +37,7 @@ def login(driver, email, password):
 
 def courseSelector(driver):
 
+    # Making sure that the course elements are on screen before doing anything.
     try:
         element = WebDriverWait(driver, 10).until(
             presence_of_element_located(
@@ -62,6 +64,7 @@ def getAssignments(driver):
     getAssignmentsButton = getElement(driver, "/html/body/div[2]/div/section[2]/div/div[2]/button[3]")
     getAssignmentsButton.click()
 
+    # Making sure the assignment elements are on screen before doing anything
     try:
         assignmentElement = WebDriverWait(driver, 10).until(
             presence_of_element_located(
@@ -76,8 +79,9 @@ def getAssignments(driver):
 
         newAssignments = []
 
+        # Looping through assignments so user can choose what they'd like. Excluding the "Active" and "Past" elements
         for assignment in assignmentList:
-            if assignment.text != "Active":
+            if assignment.text != "Active" and assignment.text != "Past":
                 print(str(index) + ": " + assignment.text)
                 newAssignments.append(assignment)
                 index += 1
@@ -98,7 +102,8 @@ def completeSlides(driver):
 
         index = 0
 
-        slide.find_element(By.TAG_NAME, "input").click() # Click 2x speed button
+        # Click 2x speed button
+        slide.find_element(By.TAG_NAME, "input").click()
 
         while index < len(amountOfSlides):
             print("Slide: " + str(index + 1) + "/" + str(len(amountOfSlides)) + " completed")
@@ -126,12 +131,14 @@ def completeMultipleChoice(driver):
 
 def completeQuestions(driver):
 
+    # Getting all question containers on the page
     questionElementList = driver.find_elements(By.CLASS_NAME, "question")
 
     if questionElementList:
+
+        # Looping through question containers
+
         for questionElement in questionElementList:
-
-
 
             spanElementList = questionElement.find_elements(By.TAG_NAME, "span")
 
@@ -141,12 +148,14 @@ def completeQuestions(driver):
                 showAnswerButton = spanElementList[1]
 
 
+                # "Show Answer" button needs to be clicked twice to reveal the answer
                 showAnswerButton.click()
                 showAnswerButton.click()
 
                 # Get the Parent Question Container
                 questionElementParent = questionElement.find_element(By.XPATH, "..")
 
+                # Get the answer
                 answerElement = questionElementParent.find_element(By.CLASS_NAME, "forfeit-answer")
 
                 questionElementParent.find_element(By.TAG_NAME, "textarea").send_keys(answerElement.text)
@@ -177,6 +186,8 @@ def completeActivites(driver):
 
 
 def moduleSelector(driver):
+
+    # Going through each page in the specific assignment you chose
 
     index = 0
 
